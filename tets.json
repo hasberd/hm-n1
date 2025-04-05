@@ -1,0 +1,59 @@
+{
+  "flowchart": {
+    "start": "Начало",
+    "init": {
+      "variables": {
+        "start": -0.5,
+        "end": 4.5,
+        "step": 0.2
+      }
+    },
+    "output_header": {
+      "text": "X\tY",
+      "separator": "-------------------"
+    },
+    "loop": {
+      "for": {
+        "initialization": "x = start",
+        "condition": "x <= end + 0.0001",
+        "increment": "x += step"
+      },
+      "calculateY": {
+        "conditional": [
+          {
+            "condition": "x > 3.5",
+            "true": "Y = 1 - 2x³"
+          },
+          {
+            "condition": "x ≥ 0",
+            "true": {
+              "cos_val": "cos(2x - 1)",
+              "conditional": [
+                {
+                  "condition": "cos_val < 0",
+                  "true": "Y = NAN"
+                },
+                {
+                  "false": "Y = √cos_val"
+                }
+              ]
+            },
+            "false": "Y = e^(-cos(2x))"
+          }
+        ]
+      },
+      "output": {
+        "conditional": [
+          {
+            "condition": "isnan(y)",
+            "true": "Вывод \"---\"",
+            "false": "Вывод y с точностью 4 знака"
+          }
+        ]
+      }
+    },
+    "output_separator": "-------------------",
+    "end": "Конец"
+  }
+}
+```
